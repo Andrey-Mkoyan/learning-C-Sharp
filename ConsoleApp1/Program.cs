@@ -1,51 +1,96 @@
 ﻿Random random = new Random();
 bool playAgain = true;
-int min = 1;
-int max = 100;
-int guess;
-int number;
-int guesses;
-string response;
+String player;
+String computer;
+String answer;
 
-while (playAgain)
+while(playAgain)
 {
-    guess = 0;
-    guesses = 0;
-    response = "";
-    number = random.Next(min, max + 1);
-
-    while(guess != number)
+    player = "";
+    computer = "";
+    answer = "";
+    while (player != "ROCK" && player != "PAPER" && player != "SCISSORS")
     {
-        Console.Write("Guess a number between " + min + " - " + max + " : ");
-        guess = Convert.ToInt32(Console.ReadLine());
-        Console.WriteLine("Guess: " + guess);
-
-        if(guess > number)
-        {
-            Console.WriteLine(guess + " is to high!");
-        }
-        else if (guess < number)
-        {
-            Console.WriteLine(guess + " is to low!");
-        }
-        guesses++;
+        Console.Write("Enter ROCK, PAPER or SCISSORS: ");
+        player = Console.ReadLine();
+        player = player.ToUpper();
     }
-    Console.WriteLine("Number: " + number);
-    Console.WriteLine("YOU WIN!");
-    Console.WriteLine("Guesses: " + guesses);
+    
+    switch(random.Next(1, 4))
+    {
+        case 1:
+            computer = "ROCK";
+            break;
+        case 2:
+            computer = "PAPER";
+            break;
+        case 3:
+            computer = "SCISSORS";
+            break;
+    }
 
-    Console.WriteLine("Would you like to play again (Y/N): ");
-    response = Console.ReadLine();
-    response = response.ToUpper();
+    Console.WriteLine("Player: " + player);
+    Console.WriteLine("Computer: " + computer);
 
-    if (response == "Y")
+    switch(player)
+    {
+        case "ROCK":
+            if(computer == "ROCK")
+            {
+                Console.WriteLine("It's a drow!");
+            }
+            else if (computer == "PAPER")
+            {
+                Console.WriteLine("You lose!");
+            }
+            else
+            {
+                Console.WriteLine("You win!");
+            }
+            break;
+        case "PAPER":
+            if (computer == "PAPER")
+            {
+                Console.WriteLine("It's a drow!");
+            }
+            else if (computer == "SCISSORS")
+            {
+                Console.WriteLine("You lose!");
+            }
+            else
+            {
+                Console.WriteLine("You win!");
+            }
+            break;
+        case "SCISSORS":
+            if (computer == "SCISSORS")
+            {
+                Console.WriteLine("It's a drow!");
+            }
+            else if (computer == "ROCK")
+            {
+                Console.WriteLine("You lose!");
+            }
+            else
+            {
+                Console.WriteLine("You win!");
+            }
+            break;
+    }
+    Console.Write("Would you like to play agai (Y/N)");
+    answer = Console.ReadLine();
+    answer = answer.ToUpper();
+
+    if(answer == "Y")
     {
         playAgain = true;
     }
     else
     {
         playAgain = false;
+        
     }
 }
 
+Console.WriteLine("Thanks for playing!");
 Console.ReadKey();
